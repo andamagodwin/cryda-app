@@ -1,4 +1,5 @@
 import { Stack, Link } from 'expo-router';
+import { View,Text } from 'react-native';
 
 import { Button } from '~/components/Button';
 import { Container } from '~/components/Container';
@@ -13,6 +14,9 @@ export default function Home() {
         <Link href={{ pathname: '/details', params: { name: 'Dan' } }} asChild>
           <Button title="Show Details" />
         </Link>
+        <View>
+          <Text className='bg-red-500'>Home</Text>
+        </View>
       </Container>
     </>
   );
