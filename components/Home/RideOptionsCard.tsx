@@ -1,0 +1,141 @@
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
+import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
+import DateTimePicker, { DateTimePickerEvent, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import { router } from 'expo-router';
+
+const RideOptionsCard = () => {
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [pickerMode, setPickerMode] = useState<'date' | 'time'>('date');
+  const [pickup, setPickup] = useState('Select pickup point');
+  const [destination, setDestination] = useState('Where are you going?');
+
+  const handleChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {
+    if (selectedDate) {
+      const newDate = new Date(date);
+      if (pickerMode === 'date') {
+        newDate.setFullYear(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
+      } else {
+        newDate.setHours(selectedDate.getHours(), selectedDate.getMinutes());
+      }
+      setDate(newDate);
+    }
+    setShowDatePicker(false);
+  };
+
+  const showPicker = (mode: 'date' | 'time') => {
+    setPickerMode(mode);
+    if (Platform.OS === 'android') {
+      DateTimePickerAndroid.open({
+        value: date,
+        onChange: handleChange,
+        mode,
+        is24Hour: false,
+      });
+    } else {
+      setShowDatePicker(true);
+    }
+  };
+
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+
+  const formatTime = (date: Date) =>
+    date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+  return (
+    <View className="bg-white rounded-2xl p-5 mx-4 my-4 shadow-md w-11/12">
+      <View className="flex-row justify-between items-center mb-5">
+        <Text className="text-[22px] font-bold text-[#333]">Plan Your Ride</Text>
+      </View>
+
+      {/* Pickup Location */}
+      <TouchableOpacity
+        className="flex-row items-center py-3"
+        onPress={() => router.push('/pickupLocation')}
+      >
+        <View className="w-10 h-10 rounded-full items-center justify-center mr-4" style={{ backgroundColor: 'rgba(61,144,239,0.1)' }}>
+          <MaterialIcons name="location-pin" size={24} color="#3d90ef" />
+        </View>
+        <View className="flex-1">
+          <Text className="text-sm text-gray-500 mb-0.5">Pickup Location</Text>
+          <Text className="text-base font-medium text-[#333]">{pickup}</Text>
+        </View>
+        <MaterialIcons name="chevron-right" size={24} color="#ccc" />
+      </TouchableOpacity>
+
+      <View className="h-px bg-gray-200 my-1.5" />
+
+      {/* Destination */}
+      <TouchableOpacity
+        className="flex-row items-center py-3"
+        onPress={() => router.push('/destination')}
+      >
+        <View className="w-10 h-10 rounded-full items-center justify-center mr-4" style={{ backgroundColor: 'rgba(255,107,107,0.1)' }}>
+          <FontAwesome name="map-marker" size={24} color="#ff6b6b" />
+        </View>
+        <View className="flex-1">
+          <Text className="text-sm text-gray-500 mb-0.5">Destination</Text>
+          <Text className="text-base font-medium text-[#333]">{destination}</Text>
+        </View>
+        <MaterialIcons name="chevron-right" size={24} color="#ccc" />
+      </TouchableOpacity>
+
+      <View className="h-px bg-gray-200 my-1.5" />
+
+      {/* Pick Date */}
+      <TouchableOpacity
+        className="flex-row items-center py-3"
+        onPress={() => showPicker('date')}
+      >
+        <View className="w-10 h-10 rounded-full items-center justify-center mr-4" style={{ backgroundColor: 'rgba(76,217,100,0.1)' }}>
+          <Ionicons name="calendar" size={24} color="#4cd964" />
+        </View>
+        <View className="flex-1">
+          <Text className="text-sm text-gray-500 mb-0.5">Pick Date</Text>
+          <Text className="text-base font-medium text-[#333]">{formatDate(date)}</Text>
+        </View>
+        <MaterialIcons name="chevron-right" size={24} color="#ccc" />
+      </TouchableOpacity>
+
+      <View className="h-px bg-gray-200 my-1.5" />
+
+      {/* Pick Time */}
+      <TouchableOpacity
+        className="flex-row items-center py-3"
+        onPress={() => showPicker('time')}
+      >
+        <View className="w-10 h-10 rounded-full items-center justify-center mr-4" style={{ backgroundColor: 'rgba(255,206,84,0.1)' }}>
+          <Ionicons name="time" size={24} color="#ffce54" />
+        </View>
+        <View className="flex-1">
+          <Text className="text-sm text-gray-500 mb-0.5">Pick Time</Text>
+          <Text className="text-base font-medium text-[#333]">{formatTime(date)}</Text>
+        </View>
+        <MaterialIcons name="chevron-right" size={24} color="#ccc" />
+      </TouchableOpacity>
+
+      {/* iOS DateTime Picker */}
+      {Platform.OS === 'ios' && showDatePicker && (
+        <DateTimePicker
+          value={date}
+          mode={pickerMode}
+          display="default"
+          onChange={handleChange}
+        />
+      )}
+
+      {/* Find Ride Button */}
+      <TouchableOpacity
+        className="bg-[#3d90ef] rounded-xl p-4 flex-row items-center justify-center mt-5"
+        onPress={() => router.push('/rides')}
+      >
+        <Text className="text-white text-lg font-bold mr-2">Find Ride</Text>
+        <MaterialIcons name="arrow-forward" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default RideOptionsCard;

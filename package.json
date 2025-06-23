@@ -36,7 +36,8 @@
     "react-native-web": "^0.20.0",
     "zustand": "^4.5.1",
     "expo-location": "~18.1.5",
-    "expo-dev-client": "~5.2.1"
+    "expo-dev-client": "~5.2.1",
+    "@react-native-community/datetimepicker": "8.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
