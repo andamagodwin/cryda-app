@@ -1,9 +1,11 @@
 import { Text, View } from "react-native";
+import Map from "~/components/Map/Map";
 
 export default function Home (){
     return (
         <View className="flex-1 items-center justify-center">
-            <Text className="text-2xl font-bold">Home</Text>
+            
+            <Map/>
         </View>
     )
 }
