@@ -146,7 +146,16 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
       {/* Find Ride Button */}
       <TouchableOpacity
         className="bg-[#3d90ef] rounded-xl p-4 flex-row items-center justify-center mt-5"
-        onPress={() => router.push('/rides')}
+        onPress={() =>
+          router.push({
+            pathname: '/findRide',
+            params: {
+              from: fromCoords?.label ?? '',
+              to: toCoords?.label ?? '',
+              date: date.toISOString(),
+            },
+          })
+        }
       >
         <Text className="text-white text-lg font-bold mr-2">Find Ride</Text>
         <MaterialIcons name="arrow-forward" size={24} color="white" />
