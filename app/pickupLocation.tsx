@@ -4,10 +4,7 @@ import DualLocationPicker from '~/components/Location/DualLocationPicker';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 
-type Coordinates = {
-  latitude: number;
-  longitude: number;
-};
+
 
 
 type Location = {

@@ -73,7 +73,7 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
         <View className="flex-1">
           <Text className="text-sm text-gray-500 mb-0.5">Pickup Location</Text>
           <Text className="text-base font-medium text-[#333]">
-  {         fromCoords?.label || "Select pickup point"}
+            {fromCoords?.label || "Select pickup point"}
           </Text>
 
         </View>

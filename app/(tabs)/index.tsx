@@ -4,6 +4,7 @@ import Header from "~/components/Header";
 import RideOptionsCard from "~/components/Home/RideOptionsCard";
 import TabSwitch from "~/components/TabSwitch";
 import { useLocalSearchParams } from "expo-router";
+import CreateDriveForm from "~/components/Home/CreateDriveForm";
 
 // import Map from "~/components/Map/Map";
 
@@ -64,9 +65,8 @@ export default function Home (){
 
                 </View>
               ) : (
-                <View className="flex-1 items-center">
-                  <Text className="text-2xl font-bold mb-4">Drive Content</Text>
-                  <Text>This is where you would show drive-related content</Text>
+                <View className="flex-1 items-center w-full">
+                  <CreateDriveForm/>
                   {/* Add your drive-specific components here */}
                 </View>
               )}
