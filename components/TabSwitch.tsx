@@ -28,7 +28,7 @@ const TabSwitch = ({ onTabChange }: TabSwitchProps) => {
 
   return (
     <View className="items-center justify-center">
-      <View className="rounded-full bg-white p-2 w-[200px] max-w-[316px]">
+      <View className="rounded-full bg-white shadow-lg p-2 w-[200px] max-w-[316px]">
         <View className="relative flex-row h-12">
           <Animated.View
             style={{
@@ -37,7 +37,7 @@ const TabSwitch = ({ onTabChange }: TabSwitchProps) => {
               top: 0,
               height: '100%',
               borderRadius: 27.5,
-              backgroundColor: '#3d90ef',
+              backgroundColor: '#FFDE21',
               shadowColor: '#000',
               shadowOffset: { width: 0, height: 2 },
               shadowOpacity: 0.1,
@@ -50,7 +50,7 @@ const TabSwitch = ({ onTabChange }: TabSwitchProps) => {
             className="flex-1 items-center justify-center z-10"
             onPress={() => handleTabPress('left')}
           >
-            <Text className={`font-bold text-base ${activeTab === 'left' ? 'text-white' : 'text-[#3d90ef]'}`}>
+            <Text className={`font-bold text-base ${activeTab === 'left' ? 'text-black' : 'text-[#FFDE21]'}`}>
               Ride
             </Text>
           </TouchableOpacity>
@@ -59,7 +59,7 @@ const TabSwitch = ({ onTabChange }: TabSwitchProps) => {
             className="flex-1 items-center justify-center z-10"
             onPress={() => handleTabPress('right')}
           >
-            <Text className={`font-bold text-base ${activeTab === 'right' ? 'text-white' : 'text-[#3d90ef]'}`}>
+            <Text className={`font-bold text-base ${activeTab === 'right' ? 'text-black' : 'text-[#FFDE21]'}`}>
               Drive
             </Text>
           </TouchableOpacity>
@@ -70,3 +70,5 @@ const TabSwitch = ({ onTabChange }: TabSwitchProps) => {
 };
 
 export default TabSwitch;
+
+

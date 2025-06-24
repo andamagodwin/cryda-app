@@ -63,6 +63,7 @@ export default function FindRide() {
       ) : rides.length === 0 ? (
         <Text className="text-center text-gray-500">No rides found.</Text>
       ) : (
+        
         <FlatList
           data={rides}
           keyExtractor={(item) => item.id.toString()}

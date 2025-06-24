@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <View className="flex-1 items-center">
+    <View className="flex-1 items-center bg-white">
       <Header />
       <View style={{ padding: 10 }}>
         <TabSwitch onTabChange={handleTabChange} />

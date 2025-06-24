@@ -57,7 +57,7 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
     date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
   return (
-    <View className="bg-white rounded-2xl p-5 mx-4 my-4 shadow-md w-11/12">
+    <View className="bg-white rounded-2xl p-5 mx-4 my-4 shadow-lg w-11/12">
       <View className="flex-row justify-between items-center mb-5">
         <Text className="text-[22px] font-bold text-[#333]">Plan Your Ride</Text>
       </View>
@@ -68,7 +68,7 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
         onPress={() => router.push('/pickupLocation')}
       >
         <View className="w-10 h-10 rounded-full items-center justify-center mr-4" style={{ backgroundColor: 'rgba(61,144,239,0.1)' }}>
-          <MaterialIcons name="location-pin" size={24} color="#3d90ef" />
+          <MaterialIcons name="location-pin" size={24} color="#FFDE21" />
         </View>
         <View className="flex-1">
           <Text className="text-sm text-gray-500 mb-0.5">Pickup Location</Text>
@@ -88,7 +88,7 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
         onPress={() => router.push('/destination')}
       >
         <View className="w-10 h-10 rounded-full items-center justify-center mr-4" style={{ backgroundColor: 'rgba(255,107,107,0.1)' }}>
-          <FontAwesome name="map-marker" size={24} color="#ff6b6b" />
+          <FontAwesome name="map-marker" size={24} color="#FFDE21" />
         </View>
         <View className="flex-1">
           <Text className="text-sm text-gray-500 mb-0.5">Destination</Text>
@@ -108,7 +108,7 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
         onPress={() => showPicker('date')}
       >
         <View className="w-10 h-10 rounded-full items-center justify-center mr-4" style={{ backgroundColor: 'rgba(76,217,100,0.1)' }}>
-          <Ionicons name="calendar" size={24} color="#4cd964" />
+          <Ionicons name="calendar" size={24} color="#FFDE21" />
         </View>
         <View className="flex-1">
           <Text className="text-sm text-gray-500 mb-0.5">Pick Date</Text>
@@ -145,7 +145,7 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
 
       {/* Find Ride Button */}
       <TouchableOpacity
-        className="bg-[#3d90ef] rounded-xl p-4 flex-row items-center justify-center mt-5"
+        className="bg-primary rounded-xl p-4 flex-row items-center justify-center mt-5"
         onPress={() =>
           router.push({
             pathname: '/findRide',
@@ -157,8 +157,8 @@ const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
           })
         }
       >
-        <Text className="text-white text-lg font-bold mr-2">Find Ride</Text>
-        <MaterialIcons name="arrow-forward" size={24} color="white" />
+        <Text className="text-black text-lg font-bold mr-2">Find Ride</Text>
+        <MaterialIcons name="chevron-right" size={24} color="black" />
       </TouchableOpacity>
     </View>
   );

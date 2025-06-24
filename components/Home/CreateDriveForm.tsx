@@ -87,15 +87,16 @@ export default function CreateDriveForm() {
 };
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 20, flexGrow: 1 ,width: '100%'}} className="bg-white w-11/12 rounded-2xl">
-      <Text className="text-2xl font-bold mb-4">Create a Drive</Text>
+    <ScrollView contentContainerStyle={{ padding: 20, flexGrow: 1 ,width: '100%'}} className="bg-white w-11/12">
+      <View className=''>
+        <Text className="text-2xl font-bold mb-4">Create a Ride</Text>
 
       <Text className="mb-1 text-gray-600">Drivers Name</Text>
       <TextInput
         value={driverName}
         onChangeText={setDriverName}
         placeholder="e.g. John Doe"
-        className="border border-gray-300 rounded-lg p-3 mb-4"
+        className="border border-black rounded-lg p-3 mb-4"
       />
 
       <Text className="mb-1 text-gray-600">Car Type</Text>
@@ -103,7 +104,7 @@ export default function CreateDriveForm() {
         value={carType}
         onChangeText={setCarType}
         placeholder="e.g. Toyota Wish"
-        className="border border-gray-300 rounded-lg p-3 mb-4"
+        className="border border-black rounded-lg p-3 mb-4"
       />
 
       <Text className="mb-1 text-gray-600">Number Plate</Text>
@@ -111,7 +112,7 @@ export default function CreateDriveForm() {
         value={numberPlate}
         onChangeText={setNumberPlate}
         placeholder="e.g. UBA 123C"
-        className="border border-gray-300 rounded-lg p-3 mb-4"
+        className="border border-black rounded-lg p-3 mb-4"
       />
 
       <Text className="mb-1 text-gray-600">Number of Seats</Text>
@@ -120,7 +121,7 @@ export default function CreateDriveForm() {
         onChangeText={setSeats}
         placeholder="e.g. 4"
         keyboardType="numeric"
-        className="border border-gray-300 rounded-lg p-3 mb-4"
+        className="border border-black rounded-lg p-3 mb-4"
       />
 
       <Text className="mb-1 text-gray-600">Price per Seat (UGX)</Text>
@@ -129,7 +130,7 @@ export default function CreateDriveForm() {
         onChangeText={setPrice}
         placeholder="e.g. 10000"
         keyboardType="numeric"
-        className="border border-gray-300 rounded-lg p-3 mb-4"
+        className="border border-black rounded-lg p-3 mb-4"
       />
 
 
@@ -190,10 +191,13 @@ export default function CreateDriveForm() {
       {/* Submit */}
       <TouchableOpacity
         onPress={handleSubmit}
-        className="bg-[#3d90ef] p-4 rounded-lg items-center"
+        className="bg-primary p-4 rounded-lg items-center"
       >
-        <Text className="text-white font-bold text-lg">Create Drive</Text>
+        <Text className="text-black font-bold text-lg">Create Drive</Text>
       </TouchableOpacity>
+
+      </View>
+      
     </ScrollView>
   );
 }
