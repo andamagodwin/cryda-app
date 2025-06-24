@@ -3,9 +3,7 @@ import Map from '~/components/Map/Map';
 import DualLocationPicker from '~/components/Location/DualLocationPicker';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-
-
-
+import { useDriveStore } from '~/store/driveStore';
 
 type Location = {
   latitude: number;
@@ -13,22 +11,21 @@ type Location = {
   label: string;
 };
 
-
-
-
 export default function PickupLocation() {
   const [from, setFrom] = useState<Location | null>(null);
   const [to, setTo] = useState<Location | null>(null);
 
+  const { setStartLocation, setEndLocation } = useDriveStore();
   const router = useRouter();
 
   const handleUseRoute = () => {
     if (!from || !to) return;
 
-    const encodedFrom = encodeURIComponent(JSON.stringify(from));
-    const encodedTo = encodeURIComponent(JSON.stringify(to));
+    // Save to Zustand instead of passing via URL
+    setStartLocation(from);
+    setEndLocation(to);
 
-    router.push(`/?from=${encodedFrom}&to=${encodedTo}`);
+    router.back(); // or router.push('/createDrive') if going forward
   };
 
   return (
