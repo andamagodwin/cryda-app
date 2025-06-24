@@ -3,22 +3,20 @@ import { View, Text, TextInput, TouchableOpacity, Platform, ScrollView, Alert } 
 import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useDriveStore } from '~/store/driveStore';
+import { supabase } from '~/utils/supabase';
 
-type Coordinates = {
-  latitude: number;
-  longitude: number;
-  label: string;
-};
+
 
 export default function CreateDriveForm() {
+  const { startLocation, endLocation } = useDriveStore( );
   const [price, setPrice] = useState('');
 
   const [driverName, setDriverName] = useState('');
   const [carType, setCarType] = useState('');
   const [numberPlate, setNumberPlate] = useState('');
   const [seats, setSeats] = useState('');
-  const [startLocation, setStartLocation] = useState<Coordinates | null>(null);
-  const [endLocation, setEndLocation] = useState<Coordinates | null>(null);
+
 
   const [date, setDate] = useState(new Date());
   const [pickerMode, setPickerMode] = useState<'date' | 'time'>('date');
@@ -51,16 +49,42 @@ export default function CreateDriveForm() {
     }
   };
 
-  const handleSubmit = () => {
-    if (!driverName || !carType || !numberPlate || !seats || !startLocation || !endLocation) {
-      Alert.alert('Missing Fields', 'Please fill all the required fields.');
-      return;
-    }
+  const handleSubmit = async () => {
+  if (!driverName || !carType || !numberPlate || !seats || !startLocation || !endLocation) {
+    Alert.alert('Missing Fields', 'Please fill all the required fields.');
+    return;
+  }
 
-    // Handle API submission or navigation
-    Alert.alert('Success', 'Drive has been created successfully.');
+  const departureTime = date.toISOString(); // Convert to ISO format
+
+  const { error } = await supabase.from('drives').insert({
+    driver_name: driverName,
+    car_type: carType,
+    number_plate: numberPlate,
+    seats: Number(seats),
+    price: Number(price),
+    start_location: startLocation,
+    end_location: endLocation,
+    departure_time: departureTime,
+  });
+
+  if (error) {
+    console.error('Supabase insert error:', error);
+    Alert.alert('Error', 'Failed to create drive.');
+  } else {
+    // Optionally add to Zustand store
     
-  };
+
+    Alert.alert('Success', 'Drive has been created successfully.');
+    setDriverName('');
+    setCarType('');
+    setNumberPlate('');
+    setSeats('');
+    setPrice('');
+    setDate(new Date());
+    router.push('/'); // Navigate back to home
+  }
+};
 
   return (
     <ScrollView contentContainerStyle={{ padding: 20, flexGrow: 1 ,width: '100%'}} className="bg-white w-11/12 rounded-2xl">
