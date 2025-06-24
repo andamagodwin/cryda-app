@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import * as Location from 'expo-location';
 import axios from 'axios';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 type Suggestion = {
   name: string;
@@ -163,13 +164,13 @@ const DualLocationPicker: React.FC<Props> = ({ onLocationsSelected }) => {
             setActiveInput('from');
           }}
           placeholder="Search starting point"
-          className="flex-1 border border-gray-300 rounded-lg p-3 text-base"
+          className="flex-1 border border-black rounded-lg p-3 text-base"
         />
         <TouchableOpacity
           onPress={handleUseCurrentLocation}
-          className="bg-blue-500 px-3 py-2 rounded-lg"
+          className="bg-primary px-3 py-2 rounded-lg"
         >
-          <Text className="text-white text-sm">Use Current</Text>
+          <MaterialIcons name="my-location" size={24} color="black" />
         </TouchableOpacity>
       </View>
 
@@ -182,7 +183,7 @@ const DualLocationPicker: React.FC<Props> = ({ onLocationsSelected }) => {
           setActiveInput('to');
         }}
         placeholder="Search destination"
-        className="border border-gray-300 rounded-lg p-3 text-base mb-3"
+        className="border border-black rounded-lg p-3 text-base mb-3"
       />
 
       {/* Suggestions */}
@@ -202,22 +203,7 @@ const DualLocationPicker: React.FC<Props> = ({ onLocationsSelected }) => {
         className="bg-white rounded-lg max-h-60"
       />
 
-      {/* Display coordinates (debug / UI feedback) */}
-      {(fromCoords || toCoords) && (
-        <View className="mt-4 p-3 bg-green-50 rounded-lg">
-          {fromCoords && (
-            <Text className="text-green-800">
-              From: {fromCoords.label} ({fromCoords.latitude}, {fromCoords.longitude})
-            </Text>
-          )}
-          {toCoords && (
-            <Text className="text-blue-800 mt-1">
-              To: {toCoords.label} ({toCoords.latitude}, {toCoords.longitude})
-            </Text>
-          )}
-        </View>
-      )}
-
+      
     </View>
   );
 };

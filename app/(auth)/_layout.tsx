@@ -9,8 +9,8 @@ export default function AuthLayout() {
           animation: "fade_from_bottom",
         }}
       >
-        <Stack.Screen name="login" />
-        <Stack.Screen name="signup" />
+        <Stack.Screen name="login" options={{ title: "Login" }} />
+        <Stack.Screen name="signup" options={{ title: "Sign Up" }} />
       </Stack>
     </>
   );

@@ -21,11 +21,12 @@ export default function Layout() {
       router.replace("/"); // Redirect logged-in users away from login
     }
   }, [session, loading, segments]);
+  
 
   if (loading) {
     return (
-      <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator size="large" />
+      <View className="flex-1 items-center justify-center bg-primary">
+        <ActivityIndicator size="large" color="#FFFFFF" />
       </View>
     );
   }

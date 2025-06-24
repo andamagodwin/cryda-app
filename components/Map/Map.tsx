@@ -16,7 +16,7 @@ export default function Map() {
     return (
             <MapView style={{ width: "100%", height: "100%" }}>
                 <Camera followUserLocation followZoomLevel={18}/>
-                <LocationPuck puckBearingEnabled puckBearing="heading" pulsing={{isEnabled: true, color: '#FFDE21'}} />
+                <LocationPuck puckBearingEnabled puckBearing="heading" pulsing={{isEnabled: true, color: '#FFDE21', radius: 100}} />
             </MapView>
 
     )
