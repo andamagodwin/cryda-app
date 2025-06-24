@@ -14,10 +14,16 @@ type Coordinates = {
   longitude: number;
 };
 
+
+type Props = {
+  onLocationSelect: (coords: Coordinates) => void;
+};
+
+
 const MAPBOX_TOKEN = 'sk.eyJ1IjoiYW5kYW1hZXpyYSIsImEiOiJjbWM4dndwMzUwenk2MmpyMmp3NW1zcG80In0.TIcX8_WM6GfdzqJHXNIf6g';
 const SESSION_TOKEN = 'd509081b-3268-454f-87b4-535b9a978cd0';
 
-const LocationSelector = () => {
+const LocationSelector: React.FC<Props> = ({ onLocationSelect }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [proximity, setProximity] = useState<string>('32.587776,0.32768'); // Default to Kampala
@@ -82,6 +88,8 @@ const LocationSelector = () => {
       const coords = res.data.features[0]?.geometry?.coordinates;
       if (coords) {
         setSelectedCoordinates({ latitude: coords[1], longitude: coords[0] });
+
+        onLocationSelect({ latitude: coords[1], longitude: coords[0] }); // Send to parent
       }
     } catch (err) {
       console.error('Retrieve failed:', err);
@@ -119,6 +127,7 @@ const LocationSelector = () => {
           <Text className="text-green-700 font-bold">Selected Location:</Text>
           <Text>Lat: {selectedCoordinates.latitude}</Text>
           <Text>Lng: {selectedCoordinates.longitude}</Text>
+          <View></View>
         </View>
       )}
     </View>

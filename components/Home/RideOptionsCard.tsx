@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 import DateTimePicker, { DateTimePickerEvent, DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { router } from 'expo-router';
 
-const RideOptionsCard = () => {
+type Props = {
+  fromCoords?: Coordinates | null;
+  toCoords?: Coordinates | null;
+};
+
+type Coordinates = {
+  latitude: number;
+  longitude: number;
+  label: string;
+};
+
+
+const RideOptionsCard: React.FC<Props> = ({ fromCoords, toCoords }) => {
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [pickerMode, setPickerMode] = useState<'date' | 'time'>('date');
-  const [pickup, setPickup] = useState('Select pickup point');
-  const [destination, setDestination] = useState('Where are you going?');
+
+  
 
   const handleChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {
     if (selectedDate) {
@@ -60,7 +72,10 @@ const RideOptionsCard = () => {
         </View>
         <View className="flex-1">
           <Text className="text-sm text-gray-500 mb-0.5">Pickup Location</Text>
-          <Text className="text-base font-medium text-[#333]">{pickup}</Text>
+          <Text className="text-base font-medium text-[#333]">
+  {         fromCoords?.label || "Select pickup point"}
+          </Text>
+
         </View>
         <MaterialIcons name="chevron-right" size={24} color="#ccc" />
       </TouchableOpacity>
@@ -77,7 +92,10 @@ const RideOptionsCard = () => {
         </View>
         <View className="flex-1">
           <Text className="text-sm text-gray-500 mb-0.5">Destination</Text>
-          <Text className="text-base font-medium text-[#333]">{destination}</Text>
+          <Text className="text-base font-medium text-[#333]">
+  {toCoords?.label || "Where are you going?"}
+</Text>
+
         </View>
         <MaterialIcons name="chevron-right" size={24} color="#ccc" />
       </TouchableOpacity>
@@ -116,7 +134,6 @@ const RideOptionsCard = () => {
         <MaterialIcons name="chevron-right" size={24} color="#ccc" />
       </TouchableOpacity>
 
-      {/* iOS DateTime Picker */}
       {Platform.OS === 'ios' && showDatePicker && (
         <DateTimePicker
           value={date}
